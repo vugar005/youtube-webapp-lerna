@@ -10,6 +10,7 @@
 /likes-app/dist
 /history-app/dist
 /watch-app/dist
+/backend/dist
 
 # firebase cache
 /shell/.firebase
