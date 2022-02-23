@@ -14,7 +14,7 @@ const sharedMappings = new mf.SharedMappings();
 
 module.exports = {
   output: {
-    uniqueName: 'watch-app',
+    uniqueName: 'history-app',
     publicPath: 'auto',
   },
   optimization: {
@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       library: { type: 'module' },
-      name: 'watch-app',
+      name: 'history-app',
       filename: 'remoteEntry.js',
       exposes: {
         './web-components': './src/bootstrap.ts', // bootstrap --> main --> AppModule --> WebComp
