@@ -16,7 +16,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "yt",
       "architect": {
         "build": {
           "builder": "ngx-build-plus:browser",
