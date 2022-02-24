@@ -11,6 +11,7 @@
 /history-app/dist
 /watch-app/dist
 /backend/dist
+/common-ui/dist
 
 # firebase cache
 /shell/.firebase
