@@ -18,4 +18,13 @@ if (!platform) {
   platform = platformBrowser();
   (window as any).plattform[ngVersion] = platform;
 }
-platform.bootstrapModule(AppModule).catch((err: any) => console.error(err));
+function bootstrap() {
+  platform.bootstrapModule(AppModule).catch((err: any) => console.error(err));
+}
+
+
+if (document.readyState === 'complete') {
+  bootstrap();
+} else {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+}

@@ -1,19 +1,27 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
+import { WebApiService } from '../web-api';
 import { CustomEventConfig } from './event-dispatcher.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventDispatcherService {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private webApiService: WebApiService
+  ) {}
+
   public dispatchEvent(eventName: string, config?: CustomEventConfig): void {
     const eventNameUnique = eventName.trim();
-    console.log(eventNameUnique);
-    const event = new CustomEvent(eventNameUnique, config);
-    window.dispatchEvent(event);
+    if (isPlatformBrowser(this.platformId)) {
+      const event = new CustomEvent(eventNameUnique, config);
+      window.dispatchEvent(event);
+    }
   }
 
   public on(eventName: string): Observable<Partial<CustomEvent>> {
-    return fromEvent(window, eventName.trim());
+    return fromEvent(this.webApiService.window, eventName.trim());
   }
 }
