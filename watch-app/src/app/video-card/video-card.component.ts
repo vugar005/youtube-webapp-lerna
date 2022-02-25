@@ -18,6 +18,8 @@ import {
   VideoPlayerComponent,
   WatchAPPEvents,
   WebApiService,
+  ToastService,
+  GlobalCustomEvent,
 } from '@youtube/common-ui';
 import { Subject, takeUntil } from 'rxjs';
 import { UIStoreService } from '../core/services/ui-store/ui-store.service';
@@ -44,6 +46,7 @@ export class VideoCardComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private webApiService: WebApiService,
     private title: Title,
+    private toastService: ToastService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -71,6 +74,9 @@ export class VideoCardComponent implements OnInit, OnDestroy {
   }
 
   public onToggleLike(): void {
+    if (!this.isLiked) {
+      this.showLikedToast();
+    }
     const config: CustomEventConfig = {
       detail: {
         videoId: this.videoId,
@@ -103,6 +109,17 @@ export class VideoCardComponent implements OnInit, OnDestroy {
 
   public onVideoReady(player: YT.Player): void {
     this.setMetaTags(player);
+  }
+
+  public showLikedToast(): void {
+    this.toastService
+      .open({ message: 'Added to liked videos', action: 'Visit now', duration: 4000 })
+      .onAction()
+      .subscribe((res) => {
+        const config: CustomEventConfig = { detail: { url: '/liked' } };
+
+        this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
+      });
   }
 
   private initStoreData(): void {
