@@ -8,6 +8,7 @@ import {
   IYoutubeService,
   ToastService,
   YOUTUBE_SERVICE,
+  WebApiService,
 } from '@youtube/common-ui';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -32,6 +33,7 @@ export class WatchVideoComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private toastService: ToastService,
     private eventDispatcher: EventDispatcherService,
+    private webApiService: WebApiService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -63,13 +65,12 @@ export class WatchVideoComponent implements OnInit, OnDestroy {
           this.handleCaseVideoNotFound();
         }
         this.cdr.detectChanges();
-
+        this.scrollToTop();
         const config: CustomEventConfig = {
           detail: {
             videoId: this.videoId,
           },
         };
-
         this.eventDispatcher.dispatchEvent(GlobalCustomEvent.ADD_VIDEO_TO_WATCH_HISTORY, config);
       });
   }
@@ -100,5 +101,10 @@ export class WatchVideoComponent implements OnInit, OnDestroy {
       },
     };
     this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
+  }
+
+  private scrollToTop(): void {
+    const scrollContent = this.webApiService.document.getElementsByClassName('mat-drawer-content')?.[0];
+    scrollContent?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 }
