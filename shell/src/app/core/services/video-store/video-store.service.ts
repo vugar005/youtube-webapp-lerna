@@ -13,7 +13,7 @@ export class VideoStoreService {
     this.store.dispatch(VideoActions.setVideoSearchQuery({ payload: query }));
   }
 
-  public selectSearchQuery() {
+  public selectSearchQuery(): Observable<string> {
     return this.store.select(selectVideoSearchQuery);
   }
 

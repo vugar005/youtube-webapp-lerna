@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UIStoreService } from './core/services/ui-store/ui-store.service';
@@ -8,7 +8,7 @@ import { UIStoreService } from './core/services/ui-store/ui-store.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnChanges {
   @Input() likedVideoList?: string[];
 
   constructor(private router: Router, private uiStore: UIStoreService, private title: Title) {}

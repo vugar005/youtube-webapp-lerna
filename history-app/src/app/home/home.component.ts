@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Inject, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject, ChangeDetectorRef, Input, OnInit, OnDestroy } from '@angular/core';
 import {
   CustomEventConfig,
   EventDispatcherService,
@@ -17,7 +17,7 @@ import { UIStoreService } from '../core/services/ui-store/ui-store.service';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   @Input() watchedVideoIds?: string[];
   public watchedVideos: IYoutubeSearchResult[] = [];
   public isWatchHistoryEnabled?: boolean;

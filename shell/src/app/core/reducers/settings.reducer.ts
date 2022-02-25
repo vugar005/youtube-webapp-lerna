@@ -20,4 +20,4 @@ export const reducer = createReducer(
   }))
 );
 
-export const selectSettingsTheme = (state: SettingsState) => state.theme;
+export const selectSettingsTheme = (state: SettingsState): AppTheme => state.theme;

@@ -31,5 +31,5 @@ export const reducer = createReducer(
   })
 );
 
-export const selectedWatchedVideos = (state: UIState) => state.watchedVideos;
-export const selectIsWatchHistoryEnabled = (state: UIState) => state.isWatchHistoryEnabled;
+export const selectedWatchedVideos = (state: UIState): string[] => state.watchedVideos;
+export const selectIsWatchHistoryEnabled = (state: UIState): boolean => state.isWatchHistoryEnabled;

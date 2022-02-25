@@ -22,4 +22,4 @@ export const reducer = createReducer(
   })
 );
 
-export const selectLikedVideos = (state: UIState) => state.likedVideoList;
+export const selectLikedVideos = (state: UIState): string[] => state.likedVideoList;
