@@ -8,7 +8,6 @@ export class YoutubeController {
   @Get('searchVideo')
   async searchVideos(@Query() query) {
     const { q } = query;
-    console.log(q);
     const results = await this.youtubeApiService.searchVideoResults(q.trim());
     return results;
   }
