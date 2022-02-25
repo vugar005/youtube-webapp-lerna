@@ -23,4 +23,4 @@ export const reducer = createReducer(
   }))
 );
 
-export const selectIsAuthenticated = (state: AuthState) => state.isAuthenticated;
+export const selectIsAuthenticated = (state: AuthState): boolean => state.isAuthenticated;
