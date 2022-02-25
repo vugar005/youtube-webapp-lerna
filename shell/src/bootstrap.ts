@@ -18,13 +18,12 @@ if (!platform) {
   platform = platformBrowser();
   (window as any).plattform[ngVersion] = platform;
 }
-function bootstrap() {
-  platform.bootstrapModule(AppModule).catch((err: any) => console.error(err));
-}
+
+platform.bootstrapModule(AppModule).catch((err: any) => console.error(err));
 
 
-if (document.readyState === 'complete') {
-  bootstrap();
-} else {
-  document.addEventListener('DOMContentLoaded', bootstrap);
-}
+// if (document.readyState === 'complete') {
+//   bootstrap();
+// } else {
+//   document.addEventListener('DOMContentLoaded', bootstrap);
+// }

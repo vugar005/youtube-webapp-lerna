@@ -15,7 +15,6 @@
   "private": true,
   "dependencies": {
     "@angular-architects/module-federation": "14.0.1",
-    "@angular-builders/custom-webpack": "^13.1.0",
     "@angular/animations": "13.2.2",
     "@angular/cdk": "13.2.2",
     "@angular/common": "13.2.2",

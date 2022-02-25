@@ -33,7 +33,6 @@ module.exports = {
         type: 'module',
       },
       remotes: {
-        watchApp: 'http://localhost:4201/remoteEntry.js',
       },
       shared: share({
         // Angular
