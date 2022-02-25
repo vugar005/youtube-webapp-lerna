@@ -79,6 +79,19 @@ a {
   }
 }
 
+.flash {
+  animation-name: flashFrames;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
+  animation-duration: 1.5s;
+}
+
+@keyframes flashFrames {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (min-width: 1900px) {
   html {
     font-size: 12px;
