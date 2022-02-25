@@ -81,7 +81,7 @@ export const reducer = createReducer(
   })
 );
 
-export const selectLikedVideos = (state: AccountState) => state.likedVideoList;
-export const selectDislikedVideos = (state: AccountState) => state.dislikedVideoList;
-export const selectedWatchedVideos = (state: AccountState) => state.watchedVideos;
-export const selectIsWatchHistoryEnabled = (state: AccountState) => state.isWatchHistoryEnabled;
+export const selectLikedVideos = (state: AccountState): string[] => state.likedVideoList;
+export const selectDislikedVideos = (state: AccountState): string[] => state.dislikedVideoList;
+export const selectedWatchedVideos = (state: AccountState): string[] => state.watchedVideos;
+export const selectIsWatchHistoryEnabled = (state: AccountState): boolean => state.isWatchHistoryEnabled;

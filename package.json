@@ -11,6 +11,8 @@
     "bootstrap": "lerna bootstrap",
     "start": "node ./scripts/prepare-common-ui.js && npx kill-port 3333 &&  lerna run start --stream",
     "start:fast": "node ./scripts/prepare-common-ui.js --fastMode && npx kill-port 3333 &&  lerna run start --stream",
-    "build": "node ./scripts/prepare-common-ui.js &&  lerna run build --stream"
+    "build": "node ./scripts/prepare-common-ui.js &&  lerna run build --stream",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream"
   }
 }
