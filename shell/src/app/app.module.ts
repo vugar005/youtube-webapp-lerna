@@ -55,7 +55,7 @@ import { HistoryAppWrapperComponent } from './history-app-wrapper/history-app-wr
     HistoryAppWrapperComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
     MatSidenavModule,
