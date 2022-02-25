@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   youtubeApiKey: 'AIzaSyCXeDGTeWD9-gVZY6VWoRPLW0LOT0yn_Es',
+  geoApiKey: 'a34e41fbc59c46df81bfe20bb18d7e95',
   backendUrl: 'http://localhost:3333',
   remotesUrl: {
     watchApp: 'http://localhost:4201',
