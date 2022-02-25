@@ -72,13 +72,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     forkJoin(reqArray)
-    .pipe(
-      catchError(() => EMPTY)
-    ).
-    subscribe((data: IYoutubeSearchResult[]) => {
-      this.likedVideos = data;
-      this.isLoading  = false;
-      this.cdr.detectChanges();
-    });
+      .pipe(catchError(() => EMPTY))
+      .subscribe((data: IYoutubeSearchResult[]) => {
+        this.likedVideos = data;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      });
   }
 }
