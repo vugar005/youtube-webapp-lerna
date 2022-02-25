@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -10,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CountryCodeDTO } from '@youtube/common-ui';
+import { CountryApiService } from '@youtube/common-ui';
 import { Subject, take, takeUntil } from 'rxjs';
 import { SettingsStore } from '../core/services/settings-store/settings-store.service';
 import { AppTheme } from '../core/services/theme-service/theme.constants';
@@ -35,8 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private videoStore: VideoStoreService,
     private router: Router,
     private settingsStore: SettingsStore,
-    private http: HttpClient,
     private themeService: ThemeService,
+    private countryApiService: CountryApiService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -78,15 +77,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private listenToSearchInput(): void {
     this.searchControl.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
-      console.log(value);
       this.videoStore.setSearchQuery(value);
       this.router.navigate(['']);
     });
   }
 
   private getCountryCode(): void {
-    this.http.get<CountryCodeDTO>('http://ip-api.com/json/?fields=countryCode').subscribe((res: CountryCodeDTO) => {
-      this.countryCode = res.countryCode;
+    this.countryApiService.getCountryCode().subscribe((data: string) => {
+      this.countryCode = data;
       this.cdr.detectChanges();
     });
   }
