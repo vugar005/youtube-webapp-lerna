@@ -36,7 +36,7 @@
             ],
             "scripts": [],
             "extraWebpackConfig": "webpack.config.js",
-						"commonChunk": false
+            "commonChunk": false
           },
           "configurations": {
             "production": {
@@ -85,11 +85,11 @@
           },
           "defaultConfiguration": "development",
           "options": {
-						"port": 4202,
-						"publicHost": "http://localhost:4202",
-						"extraWebpackConfig": "webpack.config.js",
+            "port": 4202,
+            "publicHost": "http://localhost:4202",
+            "extraWebpackConfig": "webpack.config.js",
             "proxyConfig": "proxy.conf.json"
-					}
+          }
         },
         "extract-i18n": {
           "builder": "ngx-build-plus:extract-i18n",
@@ -115,9 +115,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "likes-app"
+  "defaultProject": "likes-app",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
