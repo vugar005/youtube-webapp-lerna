@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run prerender",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng run shell:serve-ssr",
@@ -12,7 +12,8 @@
     "build:ssr": "ng build && ng run shell:server",
     "prerender": "ng run shell:prerender",
     "lint": "ng lint",
-    "lint:fix": "ng lint --fix"
+    "lint:fix": "ng lint --fix",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "dependencies": {
