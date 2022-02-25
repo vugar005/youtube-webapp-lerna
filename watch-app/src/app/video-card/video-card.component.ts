@@ -115,7 +115,7 @@ export class VideoCardComponent implements OnInit, OnDestroy {
     this.toastService
       .open({ message: 'Added to liked videos', action: 'Visit now', duration: 4000 })
       .onAction()
-      .subscribe((res) => {
+      .subscribe(() => {
         const config: CustomEventConfig = { detail: { url: '/liked' } };
 
         this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
