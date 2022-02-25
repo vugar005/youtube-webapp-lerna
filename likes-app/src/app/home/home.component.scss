@@ -78,3 +78,32 @@
     width: 360px;
   }
 }
+
+.emptyTemplate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  width: 100%;
+  .emptyTemplate-icon {
+    width: 14rem;
+    height: 14rem;
+    font-size: 14rem;
+    color: #3ea5ff;
+  }
+  &__text {
+    text-align: center;
+    text-align: center;
+    h1 {
+      margin-bottom: 5px;
+    }
+    a,
+    h3 {
+      color: #3ea5ff;
+      cursor: pointer;
+    }
+    a {
+      text-decoration: underline;
+    }
+  }
+}

@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ROOT_REDUCERS } from './reducers';
 import { environment } from '../environments/environment';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -29,6 +30,7 @@ import { environment } from '../environments/environment';
     VideoThumbnailModule,
     VideoThumbnailLoaderModule,
     MatDividerModule,
+    MatIconModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       runtimeChecks: {
         // strictStateImmutability and strictActionImmutability are enabled by default

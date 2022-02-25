@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   @Input() watchedVideoIds?: string[];
   public watchedVideos: IYoutubeSearchResult[] = [];
   public isWatchHistoryEnabled?: boolean;
-  public mockItems = new Array(2);
   public isLoading?: boolean;
 
   private readonly onDestroy$ = new Subject<void>();
@@ -48,6 +47,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     const config: CustomEventConfig = { detail: { videoId: videoId } };
     this.eventDispatcher.dispatchEvent(GlobalCustomEvent.WATCH_VIDEO, config);
+  }
+
+  public onBrowseVideos(): void {
+    const config: CustomEventConfig = { detail: { url: '/' } };
+    this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
   }
 
   public onToggleWatchHistoryEnable(): void {
@@ -80,7 +84,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private getWatchedVideos(videoIds: string[] | undefined): void {
-    console.log(videoIds);
     this.watchedVideos = [];
     this.isLoading = true;
     if (!videoIds?.length) {
@@ -102,7 +105,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((data: IYoutubeSearchResult[]) => {
-        console.log(data);
         this.watchedVideos = data;
         this.cdr.detectChanges();
       });

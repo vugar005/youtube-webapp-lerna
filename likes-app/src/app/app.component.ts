@@ -19,7 +19,6 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     const likedVideoListChange = changes && changes['likedVideoList'];
     if (likedVideoListChange) {
       const likedVideoListData = likedVideoListChange.currentValue;
