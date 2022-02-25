@@ -6,7 +6,7 @@
       [startSeconds]="startSeconds"
     ></yt-video-player>
   </div>
-  <div class="video-details">
+  <div class="video-details" *ngIf="videoResult">
     <div class="video-details__title mat-h1">{{ videoResult?.title }}</div>
     <div class="video-details__footer">
       <div class="video-details__footer__views mat-h3">{{ videoResult?.views | number: '1.0-0' }} views</div>

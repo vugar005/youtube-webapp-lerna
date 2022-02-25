@@ -81,9 +81,9 @@ a {
 
 .flash {
   animation-name: flashFrames;
-  animation-iteration-count: 2;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
-  animation-duration: 1.5s;
+  animation-duration: 2.0s;
 }
 
 @keyframes flashFrames {
