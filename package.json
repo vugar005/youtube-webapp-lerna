@@ -2,10 +2,13 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "4.0.0"
+    "cross-port-killer": "1.4.0",
+    "lerna": "4.0.0",
+    "rimraf": "3.0.2"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run start --stream"
+    "start": "node ./scripts/prepare-common-ui.js && npx kill-port 3333 &&  lerna run start --stream",
+    "build": "node ./scripts/prepare-common-ui.js &&  lerna run build --stream"
   }
 }
