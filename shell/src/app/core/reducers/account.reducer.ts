@@ -12,7 +12,7 @@ export interface AccountState {
 }
 
 const initialState: AccountState = {
-  likedVideoList: ['EbEswsDYFyM', 'hArGbyby5'],
+  likedVideoList: [],
   dislikedVideoList: [],
   isAuthenticated: false,
   watchedVideos: [],
@@ -59,12 +59,12 @@ export const reducer = createReducer(
   }),
   on(AccountActions.addVideoToHistoryList, (state, payload) => {
     const videoId = payload.videoId;
-    const watchedList = [...state.watchedVideos];
-    watchedList.push(videoId);
+    const watchedList = new Set([...state.watchedVideos]);
+    watchedList.add(videoId);
 
     return {
       ...state,
-      watchedVideos: watchedList,
+      watchedVideos: Array.from(watchedList),
     };
   }),
   on(AccountActions.clearWatchHistory, (state) => {

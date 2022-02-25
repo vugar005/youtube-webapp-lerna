@@ -23,7 +23,6 @@ export class AppComponent implements OnInit, OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     const watchedVideosListChange = changes && changes['watchedVideoList'];
     const isWatchHistoryEnabledChange = changes && changes['isWatchHistoryEnabled'];
-    console.log(watchedVideosListChange);
     if (watchedVideosListChange) {
       const watchedVideosListData = watchedVideosListChange.currentValue;
       const data = watchedVideosListData ? watchedVideosListData.split(',') : [];
@@ -32,7 +31,6 @@ export class AppComponent implements OnInit, OnChanges {
     if (isWatchHistoryEnabledChange) {
       const isWatchHistoryEnabledValue = coerceBooleanProperty(isWatchHistoryEnabledChange.currentValue);
       this.uiStore.setIsWatchHistoryEnabled({ isEnabled: isWatchHistoryEnabledValue });
-      console.log(isWatchHistoryEnabledValue);
     }
   }
 

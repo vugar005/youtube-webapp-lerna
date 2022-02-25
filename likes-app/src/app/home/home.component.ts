@@ -7,8 +7,8 @@ import {
   IYoutubeService,
   YOUTUBE_SERVICE,
 } from '@youtube/common-ui';
-import { forkJoin, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { EMPTY, forkJoin, Observable, Subject } from 'rxjs';
+import { catchError, map, takeUntil } from 'rxjs/operators';
 import { UIStoreService } from '../core/services/ui-store/ui-store.service';
 
 @Component({
@@ -19,7 +19,8 @@ import { UIStoreService } from '../core/services/ui-store/ui-store.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public likedVideos: IYoutubeSearchResult[] = [];
-  public mockItems = new Array(3);
+  public videoIds: string[] = [];
+  public isLoading!: boolean;
 
   private readonly onDestroy$ = new Subject<void>();
 
@@ -47,11 +48,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.eventDispatcher.dispatchEvent(GlobalCustomEvent.WATCH_VIDEO, config);
   }
 
+  public onBrowseVideos(): void {
+    const config: CustomEventConfig = { detail: { url: '/' } };
+    this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
+  }
+
   private initStoreData(): void {
     this.uiStore
       .selectLikedVideos()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((data: string[]) => {
+        this.videoIds = data;
         this.getLikedVideosInfo(data);
         this.cdr.detectChanges();
       });
@@ -64,10 +71,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       reqArray.push(videoRequest);
     });
 
-    forkJoin(reqArray).subscribe((data: IYoutubeSearchResult[]) => {
-      console.log(data);
-      this.likedVideos = data;
-      this.cdr.detectChanges();
-    });
+    forkJoin(reqArray)
+      .pipe(catchError(() => EMPTY))
+      .subscribe((data: IYoutubeSearchResult[]) => {
+        this.likedVideos = data;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      });
   }
 }

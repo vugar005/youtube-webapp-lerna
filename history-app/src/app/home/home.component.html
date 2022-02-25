@@ -43,7 +43,7 @@
   <yt-video-thumbnail-loader
     class="thumbnail-loader-template-item"
     [direction]="'vertical'"
-    *ngFor="let item of mockItems"
+    *ngFor="let item of watchedVideoIds"
   ></yt-video-thumbnail-loader>
 </ng-template>
 
@@ -54,7 +54,7 @@
     </div>
     <div class="emptyTemplate__text">
       <h1 class="mat-h1">Empty Watch History</h1>
-      <a class="mat-h3" [routerLink]="'../'"> Watch some videos </a>
+      <a class="mat-h3" (click)="onBrowseVideos()"> Watch some videos </a>
     </div>
   </div>
 
