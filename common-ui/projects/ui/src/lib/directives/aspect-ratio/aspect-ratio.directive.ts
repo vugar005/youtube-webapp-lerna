@@ -1,5 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnDestroy,
+  Renderer2,
+} from '@angular/core';
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { WebApiService } from '../../services';
 
 @Directive({
   selector: '[ytAspectRatio]',
@@ -9,7 +17,11 @@ export class AspectRatioDirective implements AfterViewInit, OnDestroy {
 
   private readonly onDestroy$ = new Subject<void>();
 
-  constructor(private element: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private element: ElementRef,
+    private renderer: Renderer2,
+    private webApiService: WebApiService
+  ) {}
 
   public ngAfterViewInit(): void {
     this.setDimensions();
@@ -26,11 +38,15 @@ export class AspectRatioDirective implements AfterViewInit, OnDestroy {
       return;
     }
     const width = this.element.nativeElement.clientWidth;
-    this.renderer.setStyle(this.element.nativeElement, 'height', `${width * this.ytAspectRatio}px`);
+    this.renderer.setStyle(
+      this.element.nativeElement,
+      'height',
+      `${width * this.ytAspectRatio}px`
+    );
   }
 
   private initResizeListeners(): void {
-    fromEvent(window, 'resize')
+    fromEvent(this.webApiService.window, 'resize')
       .pipe(debounceTime(100), takeUntil(this.onDestroy$))
       .subscribe(() => this.setDimensions());
   }
