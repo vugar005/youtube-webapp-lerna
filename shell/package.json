@@ -11,7 +11,8 @@
     "serve:ssr": "node dist/shell/server/main.js",
     "build:ssr": "ng build && ng run shell:server",
     "prerender": "ng run shell:prerender",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix"
   },
   "private": true,
   "dependencies": {
