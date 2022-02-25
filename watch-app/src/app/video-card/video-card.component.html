@@ -6,7 +6,7 @@
       [startSeconds]="startSeconds"
     ></yt-video-player>
   </div>
-  <div class="video-details">
+  <div class="video-details" *ngIf="videoResult">
     <div class="video-details__title mat-h1">{{ videoResult?.title }}</div>
     <div class="video-details__footer">
       <div class="video-details__footer__views mat-h3">{{ videoResult?.views | number: '1.0-0' }} views</div>
@@ -35,7 +35,7 @@
           <p class="video-details-actions__item__text mat-h3">Share</p>
         </div>
 
-        <div class="video-details-actions__item" (click)="onMiniPlayerMode()">
+        <div class="video-details-actions__item flash" (click)="onMiniPlayerMode()">
           <mat-icon class="video-details-actions__item__icon">picture_in_picture_alt</mat-icon>
           <p class="video-details-actions__item__text mat-h3">Mini Player</p>
         </div>
