@@ -56,6 +56,10 @@
     &__text {
       margin: 0;
     }
+
+    &.flash {
+      animation-iteration-count: 2;
+    }
   }
 }
 

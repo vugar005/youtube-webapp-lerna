@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { EventDispatcherService, GlobalCustomEvent, MiniVideoPayload } from '@youtube/common-ui';
+import {
+  EventDispatcherService,
+  GlobalCustomEvent,
+  MiniVideoPayload,
+  WebApiService,
+  LocalStorageEnum,
+} from '@youtube/common-ui';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { VideoStoreService } from './core/services/video-store/video-store.service';
@@ -23,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private videoStore: VideoStoreService,
     private router: Router,
     private eventDispatcher: EventDispatcherService,
+    private webApiService: WebApiService,
     private title: Title
   ) {}
 
@@ -30,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.selectStoreData();
     this.initGlobalEventListeners();
     this.setMetaTags();
+    this.tryRestoreMiniVideoSetings();
   }
 
   public ngOnDestroy(): void {
@@ -39,6 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public onCloseVideo(): void {
     this.videoStore.setIsMiniPlayerMode(false);
+    this.videoStore.setMiniPlayerVideo({ videoId: null, startSeconds: 0 });
   }
 
   public onExpandVideo(videoPayload: MiniVideoPayload): void {
@@ -75,5 +84,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private setMetaTags(): void {
     this.title.setTitle(`Youtube Angular Clone`);
+  }
+
+  private tryRestoreMiniVideoSetings(): void {
+    const localStorageRef = this.webApiService.localStorage;
+    const settings = localStorageRef.getItem(LocalStorageEnum.MINI_WIDEO_SETTINGS);
+    if (!settings) {
+      return;
+    }
+    this.videoStore.setIsMiniPlayerMode(true);
+    this.videoStore.setMiniPlayerVideo(JSON.parse(settings));
   }
 }
