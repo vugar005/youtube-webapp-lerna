@@ -78,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((event: Partial<CustomEvent>) => {
         const url = event.detail.url;
-        this.router.navigate([url]);
+        this.router.navigateByUrl(url);
       });
   }
 
