@@ -39,6 +39,9 @@ import { LikesAppWrapperComponent } from './likes-app-wrapper/likes-app-wrapper.
 import { AccountSidebarComponent } from './account-sidebar/account-sidebar.component';
 import { MiniPlayerComponent } from './mini-player/mini-player.component';
 import { HistoryAppWrapperComponent } from './history-app-wrapper/history-app-wrapper.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { KeyEventsDialogComponent } from './key-events-dialog/key-events-dialog.component';
+import { KeyEventsListenerComponent } from './key-events-listener/key-events-listener.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { HistoryAppWrapperComponent } from './history-app-wrapper/history-app-wr
     AccountSidebarComponent,
     MiniPlayerComponent,
     HistoryAppWrapperComponent,
+    KeyEventsDialogComponent,
+    KeyEventsListenerComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -67,6 +72,7 @@ import { HistoryAppWrapperComponent } from './history-app-wrapper/history-app-wr
     VideoPlayerModule,
     VideoThumbnailModule,
     NotFoundPageModule,
+    MatDialogModule,
     SearchBoxModule,
     MatMenuModule,
     AppRoutingModule,
