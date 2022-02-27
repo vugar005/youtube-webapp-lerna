@@ -88,7 +88,7 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
       this.videoLoaded.next(this.playerRef!);
       const frameId = (this.playerRef as any)?.h?.id;
       console.log(frameId);
-      (this.webApi.window as any)[WindowEnum.VIDEO_FRAME_ID] = frameId;
+      (this.webApi.window as any)[WindowEnum.CURRENT_VIDEO_FRAME_ID] = frameId;
     }
     this.stateChange.next(event.data);
   }

@@ -33,48 +33,55 @@ export class KeyEventsListenerComponent {
     this.toggleFullScreen();
   }
 
-  private getPlayerRef(): YT.Player {
-    const playerFrameId = (this.webApi.window as any)[WindowEnum.VIDEO_FRAME_ID];
+  private get playerRef(): YT.Player | null {
+    const playerFrameId = (this.webApi.window as any)[WindowEnum.CURRENT_VIDEO_FRAME_ID];
     return (this.webApi.window.YT as any).get(playerFrameId) as YT.Player;
   }
 
-  private getIframeRef(): HTMLElement | null {
-    const playerFrameId = (this.webApi.window as any)[WindowEnum.VIDEO_FRAME_ID];
+  private get iFrameRef(): HTMLElement | null {
+    const playerFrameId = (this.webApi.window as any)[WindowEnum.CURRENT_VIDEO_FRAME_ID];
     return document.getElementById(playerFrameId);
   }
 
   private seekVideoBy(seconds: number, allowSeekAhead = true): void {
-    const playerRef = this.getPlayerRef();
-    const currentTime = playerRef.getCurrentTime();
+    if (!this.playerRef) {
+      return;
+    }
+    const currentTime = this.playerRef.getCurrentTime();
     const seekTo = currentTime + seconds;
-    playerRef.seekTo(seekTo, allowSeekAhead);
+    this.playerRef.seekTo(seekTo, allowSeekAhead);
   }
 
   private togglePlayPause(): void {
-    console.log('toggle play pause');
-    const playerRef = this.getPlayerRef();
-    const playerState = playerRef.getPlayerState();
+    if (!this.playerRef) {
+      return;
+    }
+    const playerState = this.playerRef.getPlayerState();
     if (playerState === YT.PlayerState.PLAYING) {
-      playerRef.pauseVideo();
+      this.playerRef.pauseVideo();
     } else {
-      playerRef.playVideo();
+      this.playerRef.playVideo();
     }
   }
 
   private toggleMute(): void {
-    const playerRef = this.getPlayerRef();
-    const isMuted = playerRef.isMuted();
+    if (!this.playerRef) {
+      return;
+    }
+    const isMuted = this.playerRef.isMuted();
     if (isMuted) {
-      playerRef.unMute();
+      this.playerRef.unMute();
     } else {
-      playerRef.mute();
+      this.playerRef.mute();
     }
   }
 
   private toggleFullScreen(): void {
-    const iframeRef = this.getIframeRef();
+    if (!this.iFrameRef) {
+      return;
+    }
     if (!this.isFullScreen) {
-      iframeRef?.requestFullscreen();
+      this.iFrameRef?.requestFullscreen();
     } else {
       const documentRef = this.webApi.document;
       documentRef?.exitFullscreen();
@@ -83,9 +90,6 @@ export class KeyEventsListenerComponent {
 
   private get isFullScreen(): boolean {
     const documentRef = this.webApi.document;
-    return (
-      (documentRef as any).webkitIsFullScreen || //Webkit browsers
-      (documentRef as any).mozFullScreen
-    ); // Firefox
+    return (documentRef as any).webkitIsFullScreen || (documentRef as any).mozFullScreen;
   }
 }
