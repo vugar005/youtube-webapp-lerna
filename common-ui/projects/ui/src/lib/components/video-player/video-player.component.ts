@@ -13,6 +13,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { WindowEnum } from '../../constants';
+import { WebApiService } from '../../services';
 
 @Component({
   selector: 'yt-video-player',
@@ -37,7 +39,12 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
 
   private readonly onDestroy$ = new Subject<void>();
 
-  constructor(private cdr: ChangeDetectorRef, private element: ElementRef) {}
+  constructor(
+    private element: ElementRef,
+    private webApi: WebApiService,
+    private cdr: ChangeDetectorRef,
+
+    ) {}
 
   public ngOnInit(): void {
     this.loadIframScript();
@@ -79,6 +86,9 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
       this.playerRef?.playVideo();
       this.playerRef?.seekTo(this.startSeconds || 1, true);
       this.videoLoaded.next(this.playerRef!);
+      const frameId = (this.playerRef as any)?.h?.id;
+      console.log(frameId);
+      (this.webApi.window as any)[WindowEnum.CURRENT_VIDEO_FRAME_ID] = frameId;
     }
     this.stateChange.next(event.data);
   }
