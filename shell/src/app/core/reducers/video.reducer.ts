@@ -14,7 +14,7 @@ export interface VideoState {
 }
 
 const initialState: VideoState = {
-  searchQuery: 'roudeep',
+  searchQuery: 'jay aliyev roudeep',
   isMiniPlayerEnabled: false,
   miniPlayerVideo: {
     videoId: null,
