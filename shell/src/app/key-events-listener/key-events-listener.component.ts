@@ -1,12 +1,24 @@
 import { Component, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { WebApiService, WindowEnum } from '@youtube/common-ui';
+import {
+  WebApiService,
+  WindowEnum,
+  EventDispatcherService,
+  CustomEventConfig,
+  GlobalCustomEvent,
+} from '@youtube/common-ui';
+import { take } from 'rxjs';
+import { VideoStoreService } from '../core/services/video-store/video-store.service';
 @Component({
   selector: 'yt-key-events-listener',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeyEventsListenerComponent {
-  constructor(private webApi: WebApiService) {}
+  constructor(
+    private webApi: WebApiService,
+    private videoStore: VideoStoreService,
+    private eventDispatcher: EventDispatcherService
+  ) {}
 
   @HostListener('window:keydown.k', ['$event'])
   public onKeyDownK(event: Event): void {
@@ -46,6 +58,22 @@ export class KeyEventsListenerComponent {
       return;
     }
     this.toggleFullScreen();
+  }
+
+  @HostListener('window:keydown.i', ['$event'])
+  public onKeyDownI(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
+    this.toggleMiniPlayer();
+  }
+
+  @HostListener('window:keydown.ESCAPE', ['$event'])
+  public onKeyDownEscape(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
+    this.closeMiniPlayer();
   }
 
   private get playerRef(): YT.Player | null {
@@ -106,5 +134,43 @@ export class KeyEventsListenerComponent {
   private get isFullScreen(): boolean {
     const documentRef = this.webApi.document;
     return (documentRef as any).webkitIsFullScreen || (documentRef as any).mozFullScreen;
+  }
+
+  private toggleMiniPlayer(): void {
+    if (!this.playerRef) {
+      return;
+    }
+    this.videoStore
+      .selectIsMiniPlayerMode()
+      .pipe(take(1))
+      .subscribe((isMiniMode) => {
+        const videoId = (this.playerRef as any).videoId;
+        const startSeconds = this.playerRef!.getCurrentTime();
+        if (!isMiniMode) {
+          this.videoStore.setIsMiniPlayerMode(true);
+          this.videoStore.setMiniPlayerVideo({ videoId, startSeconds });
+          const config: CustomEventConfig = {
+            detail: {
+              url: '/',
+            },
+          };
+          this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
+        } else {
+          this.videoStore.setIsMiniPlayerMode(false);
+          this.videoStore.setMiniPlayerVideo({ videoId: null, startSeconds: 0 });
+          const config: CustomEventConfig = {
+            detail: {
+              url: `/watch?v=${videoId}&t=${startSeconds}`,
+            },
+          };
+          console.log(config);
+          this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
+        }
+      });
+  }
+
+  private closeMiniPlayer(): void {
+    this.videoStore.setIsMiniPlayerMode(false);
+    this.videoStore.setMiniPlayerVideo({ videoId: null, startSeconds: 0 });
   }
 }
