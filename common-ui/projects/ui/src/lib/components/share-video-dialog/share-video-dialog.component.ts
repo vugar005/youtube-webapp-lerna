@@ -52,7 +52,7 @@ export class ShareVideoDialogComponent implements OnInit, OnDestroy {
     this.startTimeControl.valueChanges.pipe(takeUntil(this.onDestroy$)).subscribe((value: boolean) => {
       if (value) {
         const time = Math.round(this.currenVideoTime);
-        this.videoUrlControl.patchValue(`${this.videoUrl}?t=${time}`);
+        this.videoUrlControl.patchValue(`${this.videoUrl}&t=${time}`);
       } else {
         this.videoUrlControl.patchValue(`${this.videoUrl}`);
       }
