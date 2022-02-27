@@ -9,27 +9,42 @@ export class KeyEventsListenerComponent {
   constructor(private webApi: WebApiService) {}
 
   @HostListener('window:keydown.k', ['$event'])
-  public onKeyDownK(): void {
+  public onKeyDownK(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
     this.togglePlayPause();
   }
 
   @HostListener('window:keydown.j', ['$event'])
-  public onKeyDownJ(): void {
+  public onKeyDownJ(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
     this.seekVideoBy(-10);
   }
 
   @HostListener('window:keydown.l', ['$event'])
-  public onKeyDownL(): void {
+  public onKeyDownL(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
     this.seekVideoBy(10);
   }
 
   @HostListener('window:keydown.m', ['$event'])
-  public onKeyDownM(): void {
+  public onKeyDownM(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
     this.toggleMute();
   }
 
   @HostListener('window:keydown.f', ['$event'])
-  public onKeyDownF(): void {
+  public onKeyDownF(event: Event): void {
+    if (event.target !== document.body) {
+      return;
+    }
     this.toggleFullScreen();
   }
 
