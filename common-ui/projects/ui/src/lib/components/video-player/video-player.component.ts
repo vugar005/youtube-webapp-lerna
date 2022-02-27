@@ -68,7 +68,6 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
     }
     if (startSecondsChange && startSecondsChange.currentValue) {
       this.player?.seekTo(startSecondsChange.currentValue || 1, true);
-      console.log('startSecondsChange', startSecondsChange);
     }
   }
 
@@ -77,7 +76,6 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
     this.stateChange.next(this.playerRef.getPlayerState());
     this.videoLoaded.next(this.playerRef);
     event.target.playVideo();
-    console.log('onReady');
   }
 
   public onStateChange(event: YT.OnStateChangeEvent): void {
@@ -87,7 +85,6 @@ export class VideoPlayerComponent implements OnInit, OnChanges, AfterViewInit, O
       this.playerRef?.seekTo(this.startSeconds || 1, true);
       this.videoLoaded.next(this.playerRef!);
       const frameId = (this.playerRef as any)?.h?.id;
-      console.log(frameId);
       (this.webApi.window as any)[WindowEnum.CURRENT_VIDEO_FRAME_ID] = frameId;
     }
     this.stateChange.next(event.data);
