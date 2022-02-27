@@ -17,6 +17,8 @@
 
     <router-outlet></router-outlet>
 
+    <yt-key-events-listener></yt-key-events-listener>
+
     <ng-container *ngIf="isMiniPlayerMode$ | async">
       <ng-container *ngIf="miniVideo$ | async as miniVideo">
         <yt-mini-player

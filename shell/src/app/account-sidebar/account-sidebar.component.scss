@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  width: 300px;
+  width: 90vw;
   height: 100%;
   background: var(--yt-spec-brand-background-primary);
 }
@@ -65,4 +65,10 @@
 
 .menu-btn {
   width: 200px;
+}
+
+@media (min-width: 350px) {
+    :host {
+      width: 300px;
+    }
 }
