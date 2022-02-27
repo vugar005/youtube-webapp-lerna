@@ -32,6 +32,7 @@ import { APP_KEY } from './app.constants';
 import { ROOT_REDUCERS } from './reducers';
 import { environment } from '../environments/environment';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [AppComponent, WatchVideoComponent, VideoCardComponent, RelatedVideosComponent],
@@ -48,6 +49,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatDividerModule,
     AppRoutingModule,
     StoreModule.forRoot(ROOT_REDUCERS, {
       runtimeChecks: {

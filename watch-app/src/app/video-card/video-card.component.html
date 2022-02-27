@@ -6,6 +6,7 @@
       [startSeconds]="startSeconds"
     ></yt-video-player>
   </div>
+
   <div class="video-details" *ngIf="videoResult">
     <div class="video-details__title mat-h1">{{ videoResult?.title }}</div>
     <div class="video-details__footer">
@@ -42,6 +43,8 @@
       </div>
     </div>
   </div>
+
+  <mat-divider></mat-divider>
 </div>
 
 <ng-template #loadingTemplate>

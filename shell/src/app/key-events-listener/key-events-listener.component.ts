@@ -137,15 +137,16 @@ export class KeyEventsListenerComponent {
   }
 
   private toggleMiniPlayer(): void {
-    if (!this.playerRef) {
-      return;
-    }
     this.videoStore
       .selectIsMiniPlayerMode()
       .pipe(take(1))
       .subscribe((isMiniMode) => {
+        if (!this.playerRef) {
+          return;
+        }
+
         const videoId = (this.playerRef as any).videoId;
-        const startSeconds = this.playerRef!.getCurrentTime();
+        const startSeconds = this.playerRef.getCurrentTime();
         if (!isMiniMode) {
           this.videoStore.setIsMiniPlayerMode(true);
           this.videoStore.setMiniPlayerVideo({ videoId, startSeconds });
@@ -163,7 +164,6 @@ export class KeyEventsListenerComponent {
               url: `/watch?v=${videoId}&t=${startSeconds}`,
             },
           };
-          console.log(config);
           this.eventDispatcher.dispatchEvent(GlobalCustomEvent.NAVIGATE, config);
         }
       });
