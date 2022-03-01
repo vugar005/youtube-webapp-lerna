@@ -6,6 +6,7 @@
       "shell",
       "watch-app",
       "likes-app",
-      "history-app"
+      "history-app",
+      "common-ui"
     ]
   }
