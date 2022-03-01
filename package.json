@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "@lerna/filter-options": "4.0.0",
     "cross-port-killer": "1.4.0",
     "lerna": "4.0.0",
     "minimist": "1.2.5",
@@ -9,11 +10,13 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "node ./scripts/prepare-common-ui.js && npx kill-port 3333 &&  lerna run start --stream",
-    "start:fast": "node ./scripts/prepare-common-ui.js --fastMode && npx kill-port 3333 &&  lerna run start --stream",
-    "build:fe": "node ./scripts/prepare-common-ui.js &&  lerna run build --stream --ignore package-backend",
+    "start": "node ./scripts/prepare-common-ui.js && node ./scripts/kill-ports.js &&  lerna run start --stream",
+    "start:fe": "node ./scripts/prepare-common-ui.js && node ./scripts/kill-ports.js &&  lerna run start --stream --ignore {backend,common-ui}",
+    "start:fe:fast": "node ./scripts/prepare-common-ui.js --fastMode && node ./scripts/kill-ports.js &&  lerna run start --stream --ignore {backend,common-ui}",
+    "start:be": "npx kill-port 3333 && lerna run start --stream --scope backend",
+    "build:fe": "node ./scripts/prepare-common-ui.js &&  lerna run build --stream --ignore backend",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix --stream",
-    "deploy:fe": "npm run build:fe && lerna run deploy --stream --ignore package-backend"
+    "deploy:fe": "npm run build:fe && lerna run deploy --stream --ignore backend"
   }
 }
