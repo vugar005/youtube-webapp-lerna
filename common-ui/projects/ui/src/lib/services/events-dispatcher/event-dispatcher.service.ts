@@ -8,10 +8,8 @@ import { CustomEventConfig } from './event-dispatcher.constants';
   providedIn: 'root',
 })
 export class EventDispatcherService {
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private webApiService: WebApiService
-  ) {}
+  // eslint-disable-next-line
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private webApiService: WebApiService) {}
 
   public dispatchEvent(eventName: string, config?: CustomEventConfig): void {
     const eventNameUnique = eventName.trim();

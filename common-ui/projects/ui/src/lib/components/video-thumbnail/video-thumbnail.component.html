@@ -3,10 +3,10 @@
   [ngClass]="{ 'thumbnail--vertical': direction === 'vertical', 'thumbnail--horizontal': direction === 'horizontal' }"
 >
   <div class="thumbnail__image" [ytAspectRatio]="0.56">
-    <img [src]="snippet?.thumbnails?.high?.url" alt="Video image" loading=lazy />
+    <img [src]="snippet?.thumbnails?.high?.url" alt="Video image" loading="lazy" />
 
     <div class="thumbnail__image__duration">
-      {{snippet?.duration}}
+      {{ snippet?.duration }}
     </div>
     <div class="image-backdrop"></div>
   </div>
@@ -23,5 +23,4 @@
       </div>
     </div>
   </div>
-
 </div>

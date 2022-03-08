@@ -12,8 +12,6 @@ export class CountryApiService {
   public getCountryCode(): Observable<string> {
     const apiKey = this.appConfig.geoApiKey;
     const url = `${GEO_API_BASE_URL}/ipinfo?apiKey=${apiKey}`;
-    return this.http.get<CountryCodeDTO>(url).pipe(
-      map((res: CountryCodeDTO) => res?.country?.iso_code)
-    );
+    return this.http.get<CountryCodeDTO>(url).pipe(map((res: CountryCodeDTO) => res?.country?.iso_code));
   }
 }
