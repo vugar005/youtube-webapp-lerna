@@ -39,9 +39,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy, ControlValueAccess
   public searchControl = new FormControl();
   public searchOptions: IYoutubeSearchResult[] = [];
 
-  constructor(@Inject(YOUTUBE_SERVICE) private youtubeService: IYoutubeService, private cdr: ChangeDetectorRef) {}
-
   private readonly onDestroy$ = new Subject<void>();
+
+  constructor(@Inject(YOUTUBE_SERVICE) private youtubeService: IYoutubeService, private cdr: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.initFormListeners();

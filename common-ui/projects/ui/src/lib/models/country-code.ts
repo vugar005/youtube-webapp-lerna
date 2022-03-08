@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 interface Language {
   iso_code: string;
   name: string;

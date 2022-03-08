@@ -40,9 +40,9 @@ export class SearchBoxMobileComponent implements OnInit, OnDestroy, ControlValue
   public searchOptions: IYoutubeSearchResult[] = [];
   public isMobileSearchActive?: boolean;
 
-  constructor(@Inject(YOUTUBE_SERVICE) private youtubeService: IYoutubeService, private cdr: ChangeDetectorRef) {}
-
   private readonly onDestroy$ = new Subject<void>();
+
+  constructor(@Inject(YOUTUBE_SERVICE) private youtubeService: IYoutubeService, private cdr: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.initFormListeners();
