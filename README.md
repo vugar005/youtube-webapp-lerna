@@ -34,6 +34,14 @@ There are 3 versions of source codes available:
 
 ## Demo: ▶
 http://youtube.vugar.app
+
+---
+**NOTE**:
+
+*Hosted application is using Turborepo edition repo*
+
+---
+
 ## Getting Started 🚀
 
 1- On project root to install root dependencies   
@@ -87,3 +95,5 @@ Below are just my experiences working in those tools. They can be inaccurate.
 ✅ Fast development efficiency   
 ✅ Dependency graph  
 
+## About me 🌴🏌️
+Xtreme Junior Front end developer focused on nice architecture and long term webapps.
