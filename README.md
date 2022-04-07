@@ -79,22 +79,26 @@ Other commands: please see ```package.json``` for other commands.
 Below are just my experiences working in those tools. They can be inaccurate.   
 ### Lerna
 ✅ Supports both same and different versions of libraries (such as Angular, RxJs)   
-✅ 100% Native. No need to change configuration of applications (such as angular.json) to make it work  
+✅ Native - Use Angular CLI   
+❌ Configuration of applications required a change to `angular.json` to make it work. Switched to `ngx-build-plus` builders to support custom webpack config.  
 ❌ Slow development efficiency. Rebuild everytime you make changes to common packages such as UI   
 ❌ No dependency graph   
 
 ### Nx
-❌ Supports both same and different versions of libraries (such as Angular, RxJs). Only Monorepo.   
-❌ Not native. Needs to change configuration of applications (such as angular.json).   
-  Uses custom plugins instead of native angular/cli. Problems with adding new packages (such as ssr)   
+❌ Not supports both same and different versions of libraries (such as Angular, RxJs). Only Monorepo.   
+❌ Not native. Uses Nx CLI  
+❌ Configuration of applications required a change to `angular.json` to make it work. Switched to Nx Officially Supported Builders to support custom webpack config.   
+  Problems with adding new packages (such as ssr)    
 ✅ Very fast development efficiency   
-✅ Poweful dependency graph   
+✅ Powerful dependency graph   
 
 ### Turborepo
-❌ Supports both same and different versions of libraries (such as Angular, RxJs). Only Monorepo.   
-✅ Native. No need to change configuration of applications (such as angular.json).   
+❌ Not supports both same and different versions of libraries (such as Angular, RxJs). Only Monorepo.   
+✅ Native - Use Angular CLI  
+❌ Configuration of applications required a change to `angular.json` to make it work. Switched to `ngx-build-plus` builders to support custom webpack config.   
 ✅ Fast development efficiency   
 ✅ Dependency graph  
+
 
 ## About me 🌴🏌️
 Xtreme Junior Front end developer focused on nice architecture and long term webapps.
