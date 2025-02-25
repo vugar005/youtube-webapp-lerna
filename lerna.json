@@ -1,0 +1,17 @@
+{
+    "version": "0.0.0",
+    "npmClient": "npm",
+    "packages": [
+      "shell",
+      "likes-app",
+      "history-app",
+      "common-ui",
+      "watch-app",
+      "backend"
+    ],
+    "command": {
+      "run": {
+        "npmClient": "npm"
+      }
+    }
+  }

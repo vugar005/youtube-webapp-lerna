@@ -1,0 +1,22 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "cross-port-killer": "1.4.0",
+    "lerna": "4.0.0",
+    "@lerna/filter-options": "4.0.0",
+    "minimist": "1.2.5",
+    "rimraf": "3.0.2"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "serve": "node ./scripts/prepare-common-ui.js && lerna run serve --stream --parallel --no-bail --ignore common-ui ",
+    "serve:fast": "node ./scripts/prepare-common-ui.js --fastMode &&  lerna run serve --stream --parallel --no-bail --ignore common-ui",
+    "build:fe": "node ./scripts/prepare-common-ui.js && lerna run build --stream  --parallel --ignore backend --ignore common-ui",
+    "lint": "lerna run lint --stream --parallel",
+    "lint:fix": "lerna run lint:fix --stream --parallel",
+    "deploy:fe": "npm run build:fe && lerna run deploy --stream --parallel --ignore-{backend, common-ui}",
+    "clean": "lerna clean",
+    "test": "lerna run serve --stream --parallel"
+  }
+}
